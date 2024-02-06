@@ -1,12 +1,19 @@
 import telebot
-from telebot import types
+import config
+import random
+import message_generator
 
-bot = telebot.TeleBot('6975528056:AAF4pgiATC0a4wmKFhH152azLzojupfpj8c')
+TOKEN = config.TOKEN
+
+bot = telebot.TeleBot(TOKEN)
 
 
 @bot.message_handler(content_types=['text'])
 def echo_all(message):
-    bot.send_message(message.chat.id, message.text)
+    if random.randint(1, 1) == 1:
+        text = message_generator.message_genarator()
+        print(text)
+        bot.send_message(message.chat.id, text)
 
 
 if __name__ == "__main__":
