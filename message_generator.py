@@ -1,5 +1,6 @@
 import os
 import random
+from index.index import search
 
 
 def delete_duplicate(lst: list) -> list:
@@ -10,17 +11,25 @@ def delete_duplicate(lst: list) -> list:
 
     return res
 
+
 def get_phrases() -> list[str]:
     phrases = []
 
     directory_path = 'texts'
 
     for filename in os.listdir(directory_path):
-        with open(f"{directory_path}/{filename}", 'r', encoding='utf-8') as file:
-            phrases += file.read().split('\n')
+        if '.txt' in filename:
+            with open(f"{directory_path}/{filename}", 'r', encoding='utf-8') as file:
+                phrases += file.read().split('\n')
 
     return delete_duplicate(phrases)
 
-def message_genarator() -> str:
-    phrases = get_phrases()
-    return random.choice(phrases)
+
+def message_genarator(text, mode=0) -> str:
+    if mode == 0:
+        phrases = get_phrases()
+        res = random.choice(phrases)
+    elif mode == 1:
+        res = search(text)
+
+    return res

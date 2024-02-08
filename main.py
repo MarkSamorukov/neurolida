@@ -11,7 +11,10 @@ bot = telebot.TeleBot(TOKEN)
 @bot.message_handler(content_types=['text'])
 def echo_all(message):
     if random.randint(1, 2) == 1:
-        text = message_generator.message_genarator()
+        try:
+            text = message_generator.message_genarator(message.text, mode=1)
+        except:
+            text = message_generator.message_genarator(message.text, mode=0)
         print(text)
         bot.send_message(message.chat.id, text)
 
