@@ -31,5 +31,7 @@ def message_genarator(text, mode=0) -> str:
         res = random.choice(phrases)
     elif mode == 1:
         res = search(text)
+    else:
+        res = ''
 
     return res
